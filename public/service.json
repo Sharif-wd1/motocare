@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "image": "/src/assets/premium-service.jpg",
+    "title": "Premium Bike Service",
+    "description": "Full bike checkup, engine tuning, and polishing to keep your bike running smooth.",
+    "price": 50,
+    "duration": "2 hours",
+    "ratingAvg": 4.8,
+    "reviews": 120
+  },
+  {
+    "id": 2,
+    "image": "/src/assets/helmet.jpg",
+    "title": "Helmet & Gear Cleaning",
+    "description": "Thorough cleaning and maintenance of helmets, jackets, and gloves for safety and comfort.",
+    "price": 20,
+    "duration": "1 hour",
+    "ratingAvg": 4.6,
+    "reviews": 80
+  },
+  {
+    "id": 3,
+    "image": "/src/assets/installation.jpg",
+    "title": "Accessories Installation",
+    "description": "Professional installation of MotoCare accessories and performance upgrades.",
+    "price": 35,
+    "duration": "1.5 hours",
+    "ratingAvg": 4.7,
+    "reviews": 95
+  },
+  {
+    "id": 4,
+    "image": "/src/assets/chain.jpg",
+    "title": "Chain & Brake Service",
+    "description": "Chain lubrication, brake adjustment, and tire inspection for safe rides.",
+    "price": 25,
+    "duration": "1 hour",
+    "ratingAvg": 4.5,
+    "reviews": 70
+  },
+  {
+    "id": 5,
+    "image": "/src/assets/oil.jpg",
+    "title": "Engine Oil Change",
+    "description": "High-quality engine oil replacement to ensure smooth performance and longer engine life.",
+    "price": 30,
+    "duration": "45 mins",
+    "ratingAvg": 4.7,
+    "reviews": 110
+  },
+  {
+    "id": 6,
+    "image": "/src/assets/body-pollishing.jpg",
+    "title": "Full Body Polishing",
+    "description": "Complete exterior polishing and waxing to give your bike a shiny, new look.",
+    "price": 40,
+    "duration": "1.5 hours",
+    "ratingAvg": 4.8,
+    "reviews": 90
+  }
+]

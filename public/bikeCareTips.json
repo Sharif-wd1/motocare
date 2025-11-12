@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "image": "../src/assets/bike-clean.jpg",
+    "title": "Keep Your Bike Clean",
+    "description": "Wash your bike regularly to prevent dust and rust buildup. A clean bike not only looks great but also runs smoother."
+  },
+  {
+    "id": 2,
+    "image": "../src/assets/lubricate-chain.jpg",
+    "title": "Lubricate the Chain",
+    "description": "Apply chain lube every few hundred kilometers to ensure a smooth and silent ride. Avoid over-lubrication."
+  },
+  {
+    "id": 3,
+    "image": "../src/assets/change-e-oil.jpg",
+    "title": "Change Engine Oil Regularly",
+    "description": "Engine oil keeps your bike’s engine healthy. Change it as per manufacturer recommendations to ensure better performance."
+  },
+  {
+    "id": 4,
+    "image": "../src/assets/check-pressure.jpg",
+    "title": "Check Tire Pressure",
+    "description": "Maintain proper tire pressure for safety and better mileage. Underinflated tires reduce control and increase wear."
+  },
+  {
+    "id": 5,
+    "image": "../src/assets/brakes-frequenntly.jpg",
+    "title": "Inspect Brakes Frequently",
+    "description": "Your brakes are your lifeline. Inspect pads and fluid regularly for safety and efficient stopping power."
+  },
+  {
+    "id": 6,
+    "image": "../src/assets/cover.jpg",
+    "title": "Cover When Not in Use",
+    "description": "Use a quality bike cover to protect your ride from dust, rain, and UV damage. Keeps your bike looking new for years."
+  }
+]
