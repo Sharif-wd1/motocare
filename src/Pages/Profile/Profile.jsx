@@ -136,19 +136,19 @@ const Profile = () => {
               Edit Profile
             </button>
 
-            <button
+            {/* <button
               onClick={handleSignOut}
               className="w-full mt-2 bg-[#001931] text-white py-2 rounded-md hover:bg-[#23354A] transition"
             >
               Sign Out
-            </button>
+            </button> */}
 
-            <button
+            {/* <button
               onClick={() => navigate("/")}
               className="w-full mt-3 bg-gray-200 text-[#001931] py-2 rounded-md hover:bg-gray-300 transition"
             >
               Back to Home
-            </button>
+            </button> */}
           </div>
         )}
       </div>
