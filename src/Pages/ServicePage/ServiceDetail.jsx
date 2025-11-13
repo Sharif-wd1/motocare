@@ -1,94 +1,67 @@
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const ServiceDetail = () => {
   const service = useLoaderData();
+  const [formData, setFormData] = useState({ name: "", email: "" });
 
-  // ✅ form state
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-
-  // ✅ handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ email validation regex
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  // ✅ booking handler
   const handleBook = (e) => {
-    e.preventDefault(); // stop form reload
-
+    e.preventDefault();
     const { name, email } = formData;
-
-    // Validation checks
-    if (name.trim() === "") {
-      toast.error("Please enter your name!");
-      return;
-    }
-    if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address!");
-      return;
-    }
-
-    // ✅ Success
-    toast.success(`${service.title} booking successful! ✅`);
-
-    // Reset form
+    if (!name.trim()) return toast.error("Please enter your name!");
+    if (!validateEmail(email)) return toast.error("Enter a valid email!");
+    toast.success(`${service.title} booked successfully ✅`);
     setFormData({ name: "", email: "" });
   };
 
   return (
-    <section className="py-10 md:py-20 px-5 md:px-16 lg:px-20">
-      <div className="flex flex-col lg:flex-row justify-between gap-8 items-start">
-        {/* Left Image Section */}
-        <div className="w-full lg:w-1/2">
+    <section className="py-16 md:py-24 px-5 md:px-16 lg:px-24">
+      <div className="flex flex-col lg:flex-row gap-10 items-start">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full lg:w-1/2"
+        >
           <img
             src={service.image}
             alt={service.title}
-            className="w-full h-auto rounded-2xl object-cover shadow-md"
+            className="w-full h-auto rounded-3xl object-cover shadow-lg"
           />
-        </div>
+        </motion.div>
 
-        {/* Right Details Section */}
-        <div className="w-full lg:w-1/2">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#001931] mb-3">
-            Service: {service.title}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full lg:w-1/2"
+        >
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#001931] mb-4">
+            {service.title}
           </h1>
 
-          <div className="space-y-2 text-[#333] text-sm sm:text-base mb-6">
-            <h3>
-              <span className="font-semibold">Duration:</span> {service.duration}
-            </h3>
-            <h3>
-              <span className="font-semibold">Description:</span>{" "}
-              {service.description}
-            </h3>
-            <h3>
-              <span className="font-semibold">Rating:</span> {service.ratingAvg}
-            </h3>
-            <h3>
-              <span className="font-semibold">Reviews:</span> {service.reviews}
-            </h3>
-            <h3 className="text-[#00A86B] font-bold text-lg mt-2">
-              Price: ${service.price}
-            </h3>
+          <div className="space-y-2 text-[#333] text-base mb-6">
+            <p><span className="font-semibold">Duration:</span> {service.duration}</p>
+            <p><span className="font-semibold">Description:</span> {service.description}</p>
+            <p><span className="font-semibold">Rating:</span> {service.ratingAvg}</p>
+            <p><span className="font-semibold">Reviews:</span> {service.reviews}</p>
+            <p className="text-[#00A86B] font-bold text-lg mt-3">Price: ${service.price}</p>
           </div>
 
-          {/* Booking Form */}
           <form
             onSubmit={handleBook}
-            className="bg-white p-5 rounded-xl shadow-md border"
+            className="bg-white p-6 rounded-xl shadow-xl border border-gray-100"
           >
-            <label className="block text-left text-[#001931] font-medium">
+            <label className="block text-left font-semibold text-[#001931]">
               Name
             </label>
             <input
@@ -96,11 +69,10 @@ const ServiceDetail = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#FF8811]"
-              placeholder="Enter your name"
+              className="border border-gray-300 rounded-md p-2 w-full mt-1 mb-4 focus:ring-2 focus:ring-[#FF8811]"
             />
 
-            <label className="block text-left text-[#001931] font-medium">
+            <label className="block text-left font-semibold text-[#001931]">
               Email
             </label>
             <input
@@ -108,18 +80,19 @@ const ServiceDetail = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="border border-gray-300 rounded-md p-2 w-full mt-1 mb-4 focus:outline-none focus:ring-2 focus:ring-[#FF8811]"
-              placeholder="Enter your email"
+              className="border border-gray-300 rounded-md p-2 w-full mt-1 mb-5 focus:ring-2 focus:ring-[#FF8811]"
             />
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               type="submit"
-              className="bg-[#FF8811] hover:bg-[#ff9a3c] text-white font-semibold py-2 w-full rounded-md transition-all duration-300"
+              className="bg-[#FF8811] hover:bg-[#ff9a3c] text-white font-semibold py-2 w-full rounded-md transition-all"
             >
               Book Now
-            </button>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
