@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
@@ -18,114 +17,77 @@ const SignIn = () => {
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
-  const [editMode, setEditMode] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newPhoto, setNewPhoto] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  
- const from =
-  location.state?.from?.pathname &&
-  location.state.from.pathname !== "/signin"
-    ? location.state.from.pathname
-    : "/";
+  const from =
+    location.state?.from?.pathname && location.state.from.pathname !== "/signin"
+      ? location.state.from.pathname
+      : "/";
 
-
-
-  // Sign In (Email & Password)
   const handleSignin = (e) => {
     e.preventDefault();
-    const emailVal = e.target.email?.value;
-    const password = e.target.password?.value;
-    setEmail(emailVal);
+    const emailVal = e.target.email.value;
+    const password = e.target.password.value;
 
     signInWithEmailAndPassword(auth, emailVal, password)
       .then((res) => {
         setUser(res.user);
-        toast.success("Signin successful");
-        navigate(from, { replace: true }); // 🔹 redirect to original page
+        toast.success("Signin successful!");
+        navigate(from, { replace: true });
       })
       .catch((e) => toast.error(e.message));
   };
 
-  // Google Sign In
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
         setUser(res.user);
-        toast.success("Signin successful");
-        navigate(from, { replace: true }); // 🔹 redirect to original page
+        toast.success("Signin successful!");
+        navigate(from, { replace: true });
       })
       .catch((e) => toast.error(e.message));
   };
 
-  //  Sign Out
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Signout Successful");
+        toast.success("Signout successful");
         setUser(null);
       })
       .catch((e) => toast.error(e.message));
   };
 
-  //  Forgot Password Redirect
-  const handleForgotPass = () => {
-    navigate("/forgot-password", { state: { email } });
-  };
-
-  //  Save Updated Profile
-  const handleProfileUpdate = async () => {
-    if (!auth.currentUser) return toast.error("No user logged in");
-
-    try {
-      await updateProfile(auth.currentUser, {
-        displayName: newName || auth.currentUser.displayName,
-        photoURL: newPhoto || auth.currentUser.photoURL,
-      });
-
-      setUser({
-        ...auth.currentUser,
-        displayName: newName || auth.currentUser.displayName,
-        photoURL: newPhoto || auth.currentUser.photoURL,
-      });
-
-      toast.success("Profile updated successfully");
-      setEditMode(false);
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
   return (
-    <div className="min-h-[90vh] flex items-center justify-center bg-[#F1F5E8] relative overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute w-64 h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-10 animate-pulse"></div>
-        <div className="absolute w-64 h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-10 animate-pulse"></div>
+    <div className="min-h-[90vh] flex flex-col items-center justify-center bg-[#F1F5E8] relative overflow-hidden px-5 sm:px-10">
+      {/* Decorative Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-5 animate-pulse"></div>
+        <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-5 animate-pulse"></div>
       </div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-[#001931]">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-10 py-10">
         {/* Left Side */}
-        <div className="max-w-lg text-center lg:text-left">
-          <h1 className="text-5xl font-extrabold text-[#001931]">
-            Welcome Back to MotoCare
+        <div className="text-center lg:text-left w-full lg:w-1/2">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#001931]">
+            Welcome Back to <span className="text-[#FF8811]">MotoCare</span>
           </h1>
-          <p className="mt-4 text-lg text-[#627382] leading-relaxed">
-            Sign in to manage your bookings, check bike care updates, and enjoy personalized service recommendations.
+          <p className="mt-4 text-base sm:text-lg text-[#627382] leading-relaxed">
+            Sign in to manage bookings, track updates, and enjoy personalized
+            service recommendations — all from one place.
           </p>
         </div>
 
-        {/* Right Side */}
-        <div className="w-full max-w-md backdrop-blur-xl bg-white/70 border border-[#001931]/10 shadow-lg rounded-2xl p-8">
+        {/* Right Side (Form) */}
+        <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-[#001931]/10 shadow-xl rounded-2xl p-6 sm:p-8">
           <h2 className="text-2xl font-semibold mb-6 text-center text-[#001931]">
             {user ? "Your Profile" : "Sign In"}
           </h2>
 
           {!user ? (
-            //  Sign In Form
             <form onSubmit={handleSignin} className="space-y-4">
+              {/* Email */}
               <div>
                 <label className="block text-sm font-medium mb-1 text-[#001931]">
                   Email
@@ -136,9 +98,11 @@ const SignIn = () => {
                   placeholder="example@email.com"
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+                  required
                 />
               </div>
 
+              {/* Password */}
               <div className="relative">
                 <label className="block text-sm font-medium mb-1 text-[#001931]">
                   Password
@@ -148,25 +112,28 @@ const SignIn = () => {
                   name="password"
                   placeholder="••••••••"
                   className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+                  required
                 />
                 <span
                   onClick={() => setShow(!show)}
-                  className="absolute right-[8px] top-[36px] cursor-pointer z-50"
+                  className="absolute right-3 top-9 cursor-pointer text-gray-600"
                 >
                   {show ? <FaEye /> : <IoEyeOff />}
                 </span>
               </div>
 
-              <div className="flex justify-between items-center text-sm text-[#627382]">
+              {/* Forgot Password */}
+              <div className="flex justify-end">
                 <button
                   type="button"
-                  onClick={handleForgotPass}
-                  className="hover:underline text-[#001931]"
+                  onClick={() => navigate("/forgot-password", { state: { email } })}
+                  className="text-sm text-[#001931] hover:underline"
                 >
                   Forgot Password?
                 </button>
               </div>
 
+              {/* Submit */}
               <button
                 type="submit"
                 className="w-full bg-[#001931] hover:bg-[#23354A] text-white font-semibold py-2 rounded-md transition"
@@ -174,16 +141,17 @@ const SignIn = () => {
                 Sign In
               </button>
 
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="h-px w-16 bg-black"></div>
-                <span className="text-sm text-black">or</span>
-                <div className="h-px w-16 bg-black"></div>
+              {/* Google Sign In */}
+              <div className="flex items-center justify-center gap-2 my-3">
+                <div className="h-px w-16 bg-gray-400"></div>
+                <span className="text-sm text-gray-600">or</span>
+                <div className="h-px w-16 bg-gray-400"></div>
               </div>
 
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold border-2 border-black hover:bg-gray-100 transition-colors cursor-pointer"
+                className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold border border-gray-400 hover:bg-gray-100 transition"
               >
                 <img
                   src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -193,25 +161,32 @@ const SignIn = () => {
                 Continue with Google
               </button>
 
-              <div className="text-center mt-3">
-                <p className="text-sm text-[#627382]">
-                  Don’t have an account?{" "}
-                  <Link
-                    to="/signup"
-                    className="text-[#001931] font-semibold hover:underline"
-                  >
-                    Create one
-                  </Link>
-                </p>
-              </div>
+              {/* Link to Signup */}
+              <p className="text-center text-sm text-[#627382] mt-3">
+                Don’t have an account?{" "}
+                <Link
+                  to="/signup"
+                  className="text-[#001931] font-semibold hover:underline"
+                >
+                  Create one
+                </Link>
+              </p>
             </form>
           ) : (
-            //  Profile Section (optional)
             <div className="text-center">
-              <img src={user?.photoURL || "https://via.placeholder.com/100"} className="h-20 w-20 rounded-full mx-auto" alt="" />
-              <h2 className="text-xl mt-3">{user?.displayName || "No Name"}</h2>
+              <img
+                src={user?.photoURL || "https://via.placeholder.com/100"}
+                alt="User"
+                className="h-20 w-20 rounded-full mx-auto"
+              />
+              <h2 className="text-xl mt-3 font-semibold">
+                {user?.displayName || "No Name"}
+              </h2>
               <p>{user?.email}</p>
-              <button onClick={handleSignOut} className="btn w-full bg-[#001931] text-white mt-4">
+              <button
+                onClick={handleSignOut}
+                className="w-full bg-[#001931] hover:bg-[#23354A] text-white py-2 rounded-md mt-4"
+              >
                 Sign Out
               </button>
             </div>
@@ -223,8 +198,6 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-
 
 
 

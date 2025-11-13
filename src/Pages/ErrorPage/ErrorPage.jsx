@@ -1,25 +1,29 @@
 import React from "react";
 import errorI from "../../assets/error-404.png";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom"; 
 
 const ErrorPage = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate(); 
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <img src={errorI} alt="" />
-      <h1 className="text-5xl font-semibold text-[#001931] mt-4">
-        Oops, page not found!
+    <div className="flex flex-col justify-center items-center text-center min-h-screen bg-[#F9FAFB] px-4">
+      <img
+        src={errorI}
+        alt="404 Error"
+        className="max-w-xs md:max-w-sm lg:max-w-md mb-6"
+      />
+      <h1 className="text-4xl md:text-5xl font-bold text-[#001931] mb-3">
+        Oops! Page Not Found
       </h1>
-      <p className="text-[20px] text-[#627382] mt-[8px] mb-4">
-        The page you are looking for is not available.
+      <p className="text-[#627382] text-lg mb-6 max-w-md">
+        The page you’re looking for doesn’t exist or has been moved.
       </p>
-      <a
-        onClick={() => navigate("/")}
-        className="btn text-white border-none bg-[linear-gradient(125.07deg,rgba(99,46,227,1),rgba(159,98,242,1)_100%)] hover:opacity-90"
-        href=""
+      <button
+        onClick={() => navigate("/")} // ✅ Navigate works now
+        className="bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold py-2 px-6 rounded-md hover:opacity-90 transition duration-300"
       >
         Go Back Home
-      </a>
+      </button>
     </div>
   );
 };

@@ -14,25 +14,19 @@ const Slider = () => {
       id: 1,
       image: rcImg,
       title: 'Ride with Confidence',
-      description:
-        'Discover premium motorbikes and unmatched service with MotoCare — your trusted ride partner.',
-      button: 'Explore Bikes',
+      description: 'Discover premium motorbikes and unmatched service with MotoCare — your trusted ride partner.',
     },
     {
       id: 2,
       image: smsImg,
       title: 'Safety Meets Style',
-      description:
-        'Top-quality helmets and safety gear designed for comfort and protection on every ride.',
-      button: 'Shop Helmets',
+      description: 'Top-quality helmets and safety gear designed for comfort and protection on every ride.',
     },
     {
       id: 3,
       image: maImg,
       title: 'MotoCare Accessories',
-      description:
-        'Upgrade your biking experience with genuine MotoCare accessories and maintenance kits.',
-      button: 'View Accessories',
+      description: 'Upgrade your biking experience with genuine MotoCare accessories and maintenance kits.',
     },
   ];
 
@@ -43,35 +37,26 @@ const Slider = () => {
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
         effect="fade"
-        loop={true}
+        loop
         className="w-full"
       >
-        {slides.map((slide) => (
+        {slides.map(slide => (
           <SwiperSlide key={slide.id}>
-            
-            <div className="relative w-full h-[70vh] md:h-[100vh] overflow-hidden flex justify-center items-center bg-black">
-
-              
+            <div className="relative w-full h-[55vh] sm:h-[70vh] md:h-[100vh] flex justify-center items-center bg-black">
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-contain md:object-cover object-center transition-transform duration-[3000ms] ease-in-out scale-100 hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-[3000ms] ease-in-out hover:scale-105"
               />
-
-              
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-              
-              <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 text-white">
-                <h2 className="text-3xl md:text-6xl font-extrabold tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] mb-4">
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-8 text-white">
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-3 drop-shadow-lg">
                   {slide.title}
                 </h2>
-                <p className="max-w-2xl text-sm md:text-lg opacity-95 mb-6 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <p className="max-w-xl text-sm sm:text-base md:text-lg opacity-90 leading-relaxed">
                   {slide.description}
                 </p>
               </div>
@@ -84,4 +69,3 @@ const Slider = () => {
 };
 
 export default Slider;
-

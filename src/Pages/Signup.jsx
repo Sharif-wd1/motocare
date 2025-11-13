@@ -1,262 +1,144 @@
-import { Link } from "react-router";
-
+import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-
 import { IoEyeOff } from "react-icons/io5";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
-
 const Signup = () => {
-    const [show, setShow] = useState(false);
-    const handleSignup = (e) => {
-        e.preventDefault();
-        const displayName = e.target.name?.value;
-        const photoURL = e.target.photo?.value;
-        const email = e.target.email?.value;
-        const password = e.target.password?.value;
-        console.log(email, password , "photo name check");
+  const [show, setShow] = useState(false);
 
-        const regExp =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const displayName = e.target.name.value;
+    const photoURL = e.target.photo.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-        console.log(regExp.test(password));
+    const regExp =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
 
-        if (!regExp.test(password)) {
-          toast.error(
-            "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
-          );
-          return;
-        }
-
-        createUserWithEmailAndPassword(auth, email, password).then(res => {
-            updateProfile(res.user , {displayName,photoURL}).then(res => {
-                console.log(res);
-                toast.success("Signup successfull");
-            }).catch(e => {
-                toast.error(e.message);
-            })
-            console.log(res);
-            toast.success("Signup successfull");
-        }).catch(e => {
-            console.log(e);
-        console.log(e.code);
-        if (e.code === "auth/email-already-in-use") {
-          toast.error(
-            "User already exists in the database. Etai bastob haahahahaha"
-          );
-        } else if (e.code === "auth/weak-password") {
-          toast.error("Bhai tomake at least 6 ta digit er pass dite hobe");
-        } else if (e.code === "auth/invalid-email") {
-          toast.error("Invalid email format. Please check your email.");
-        } else if (e.code === "auth/user-not-found") {
-          toast.error("User not found. Please sign up first.");
-        } else if (e.code === "auth/wrong-password") {
-          toast.error("Wrong password. Please try again.");
-        } else if (e.code === "auth/user-disabled") {
-          toast.error("This user account has been disabled.");
-        } else if (e.code === "auth/too-many-requests") {
-          toast.error("Too many attempts. Please try again later.");
-        } else if (e.code === "auth/operation-not-allowed") {
-          toast.error("Operation not allowed. Please contact support.");
-        } else if (e.code === "auth/network-request-failed") {
-          toast.error("Network error. Please check your connection.");
-        } else {
-          toast.error(e.message || "An unexpected error occurred.");
-        }
-        })
+    if (!regExp.test(password)) {
+      toast.error(
+        "Password must include uppercase, lowercase, number & special char (min 8)"
+      );
+      return;
     }
 
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        updateProfile(res.user, { displayName, photoURL })
+          .then(() => toast.success("Signup successful"))
+          .catch((e) => toast.error(e.message));
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
-    // <div className="min-h-[96vh] flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 relative overflow-hidden">
-    //   {/* Animated floating circles */}
-    //   <div className="absolute inset-0">
-    //     <div className="absolute w-72 h-72 bg-pink-400/30 rounded-full blur-2xl top-10 left-10 animate-pulse"></div>
-    //     <div className="absolute w-72 h-72 bg-purple-400/30 rounded-full blur-2xl bottom-10 right-10 animate-pulse"></div>
-    //   </div>
+    <div className="min-h-[90vh] flex flex-col items-center justify-center bg-[#F1F5E8] relative overflow-hidden px-5 sm:px-10">
+      {/* Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-5 animate-pulse"></div>
+        <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-5 animate-pulse"></div>
+      </div>
 
-    //     <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
-    //       <div className="max-w-lg text-center lg:text-left">
-    //         <h1 className="text-5xl font-extrabold drop-shadow-lg">
-    //           Create Your Account
-    //         </h1>
-    //         <p className="mt-4 text-lg text-white/80 leading-relaxed">
-    //           Join our community and unlock exclusive features. Your journey
-    //           begins here!
-    //         </p>
-    //       </div>
-
-    //       <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8">
-    //         <h2 className="text-2xl font-semibold mb-6 text-center text-white">
-    //           Sign Up
-    //         </h2>
-
-    //         <form onSubmit={handleSignup} className="space-y-4">
-    //           <div>
-    //             <label className="block text-sm font-medium mb-1">Name</label>
-    //             <input
-    //               type="text"
-    //               name="name"
-    //               placeholder="Habib utsho"
-    //               className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-    //             />
-    //           </div>
-    //           <div>
-    //             <label className="block text-sm font-medium mb-1">Photo</label>
-    //             <input
-    //               type="text"
-    //               name="photo"
-    //               placeholder="Your photo URL here"
-    //               className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-    //             />
-    //           </div>
-
-    //           <div>
-    //             <label className="block text-sm font-medium mb-1">Email</label>
-    //             <input
-    //               type="email"
-    //               name="email"
-    //               placeholder="example@email.com"
-    //               className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-    //             />
-    //           </div>
-
-    //           <div className="relative">
-    //             <label className="block text-sm font-medium mb-1">
-    //               Password
-    //             </label>
-    //             <input
-    //               type={"text"}
-    //               name="password"
-    //               placeholder="••••••••"
-    //               className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-    //             />
-    //           </div>
-
-    //           <button type="submit" className="my-btn">
-    //             Sign Up
-    //           </button>
-
-    //           <div className="text-center mt-3">
-    //             <p className="text-sm text-white/80">
-    //               Already have an account?{" "}
-    //               <Link
-    //                 to="/signin"
-    //                 className="text-pink-300 hover:text-white font-medium underline"
-    //               >
-    //                 Sign in
-    //               </Link>
-    //             </p>
-    //           </div>
-    //         </form>
-    //       </div>
-    //     </div>
-    // </div>
-    <div className="min-h-[90vh] flex items-center justify-center bg-[#F1F5E8] relative overflow-hidden">
-  {/* Decorative Background Circles */}
-  <div className="absolute inset-0">
-    <div className="absolute w-64 h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-10 animate-pulse"></div>
-    <div className="absolute w-64 h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-10 animate-pulse"></div>
-  </div>
-
-  <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-[#001931]">
-    {/* Left Text Section */}
-    <div className="max-w-lg text-center lg:text-left">
-      <h1 className="text-5xl font-extrabold text-[#001931] drop-shadow-sm">
-        Create Your MotoCare Account
-      </h1>
-      <p className="mt-4 text-lg text-[#627382] leading-relaxed">
-        Join MotoCare and enjoy exclusive bike care services, maintenance
-        reminders, and special offers — all in one place!
-      </p>
-    </div>
-
-    {/* Signup Form Section */}
-    <div className="w-full max-w-md backdrop-blur-xl bg-white/70 border border-[#001931]/10 shadow-lg rounded-2xl p-8">
-      <h2 className="text-2xl font-semibold mb-6 text-center text-[#001931]">
-        Sign Up
-      </h2>
-
-      <form onSubmit={handleSignup} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1 text-[#001931]">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter your name"
-            className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-[#001931]">
-            Photo URL
-          </label>
-          <input
-            type="text"
-            name="photo"
-            placeholder="Your photo URL here"
-            className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1 text-[#001931]">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="example@email.com"
-            className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
-          />
-        </div>
-
-        <div className="relative"> 
-          <label className="block text-sm font-medium mb-1 text-[#001931]">
-            Password
-          </label>
-          <input
-            type={show ? "text" : "password"}
-            name="password"
-            placeholder="••••••••"
-            className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
-          />
-          <span
-                  onClick={() => setShow(!show)}
-                  className="absolute right-[8px] top-[36px] cursor-pointer z-50"
-                >
-                  {show ? <FaEye /> : <IoEyeOff />}
-                </span>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-[#001931] hover:bg-[#23354A] text-white font-semibold py-2 rounded-md transition"
-        >
-          Sign Up
-        </button>
-
-        <div className="text-center mt-3">
-          <p className="text-sm text-[#627382]">
-            Already have an account?{" "}
-            <Link
-              to="/signin"
-              className="text-[#001931] font-semibold hover:underline"
-            >
-              Sign in
-            </Link>
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-10 py-10">
+        {/* Left Text */}
+        <div className="text-center lg:text-left w-full lg:w-1/2">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#001931]">
+            Create Your <span className="text-[#FF8811]">MotoCare</span> Account
+          </h1>
+          <p className="mt-4 text-base sm:text-lg text-[#627382] leading-relaxed">
+            Join MotoCare to enjoy exclusive bike care services, reminders, and
+            special offers tailored just for you.
           </p>
         </div>
-      </form>
-    </div>
-  </div>
-</div>
 
+        {/* Right Form */}
+        <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-[#001931]/10 shadow-xl rounded-2xl p-6 sm:p-8">
+          <h2 className="text-2xl font-semibold mb-6 text-center text-[#001931]">
+            Sign Up
+          </h2>
+
+          <form onSubmit={handleSignup} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-[#001931]">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1 text-[#001931]">
+                Photo URL
+              </label>
+              <input
+                type="text"
+                name="photo"
+                placeholder="Your photo URL"
+                className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1 text-[#001931]">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="example@email.com"
+                className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+                required
+              />
+            </div>
+
+            <div className="relative">
+              <label className="block text-sm font-medium mb-1 text-[#001931]">
+                Password
+              </label>
+              <input
+                type={show ? "text" : "password"}
+                name="password"
+                placeholder="••••••••"
+                className="w-full px-4 py-2 rounded-md border border-[#C7D0D9] focus:outline-none focus:ring-2 focus:ring-[#627382]"
+                required
+              />
+              <span
+                onClick={() => setShow(!show)}
+                className="absolute right-3 top-9 cursor-pointer text-gray-600"
+              >
+                {show ? <FaEye /> : <IoEyeOff />}
+              </span>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#001931] hover:bg-[#23354A] text-white font-semibold py-2 rounded-md transition"
+            >
+              Sign Up
+            </button>
+
+            <p className="text-center text-sm text-[#627382] mt-3">
+              Already have an account?{" "}
+              <Link
+                to="/signin"
+                className="text-[#001931] font-semibold hover:underline"
+              >
+                Sign In
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
