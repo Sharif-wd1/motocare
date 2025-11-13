@@ -1,23 +1,42 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
-import ServiceCard from '../../Components/Service/ServiceCard';
+import React from "react";
+import { motion } from "framer-motion";
+import { useLoaderData } from "react-router";
+import ServiceCard from "../../Components/Service/ServiceCard";
 
 const Service = () => {
   const servicesData = useLoaderData();
 
   return (
-    <section className="bg-[#F1F5E8] py-10 md:py-20 px-5 md:px-16 lg:px-20 text-center">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#001931]">
+    <section className="bg-[#F9FBF5] py-14 md:py-24 px-5 md:px-16 lg:px-24 text-center">
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl sm:text-5xl font-extrabold text-[#001931]"
+      >
         Our Bike Care Service
-      </h1>
+      </motion.h1>
 
-      <p className="text-sm sm:text-base md:text-[18px] lg:text-[20px] text-[#627382] mt-4 mb-10 max-w-3xl mx-auto leading-relaxed">
-        Keep your bike in top shape with MotoCare! From engine cleaning and brake tuning to full polishing, our expert team ensures your bike runs smooth, looks sharp, and stays ready for every ride.
-      </p>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="text-base md:text-lg lg:text-xl text-[#627382] mt-5 mb-12 max-w-3xl mx-auto leading-relaxed"
+      >
+        Keep your bike in top shape with MotoCare! From engine cleaning to full
+        polishing, our experts make sure your ride looks sharp and runs smooth.
+      </motion.p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {servicesData.map((serviceData) => (
-          <ServiceCard key={serviceData.id} serviceData={serviceData} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {servicesData.map((serviceData, index) => (
+          <motion.div
+            key={serviceData.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.15 }}
+          >
+            <ServiceCard serviceData={serviceData} />
+          </motion.div>
         ))}
       </div>
     </section>

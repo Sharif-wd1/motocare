@@ -14,7 +14,7 @@ const Service = () => {
         transition={{ duration: 0.6 }}
         className="text-4xl sm:text-5xl font-extrabold text-[#001931]"
       >
-        Our Bike Care Service
+        Popular Bike Care Service
       </motion.h1>
 
       <motion.p
