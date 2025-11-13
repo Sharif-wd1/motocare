@@ -37,17 +37,17 @@ const Signup = () => {
 
   return (
     <div className="min-h-[90vh] flex flex-col items-center justify-center bg-[#F1F5E8] relative overflow-hidden px-5 sm:px-10">
-      {/* Background */}
+     
       <div className="absolute inset-0 -z-10">
         <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-5 animate-pulse"></div>
         <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-5 animate-pulse"></div>
       </div>
 
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-10 py-10">
-        {/* Left Text */}
+       
         <div className="text-center lg:text-left w-full lg:w-1/2">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#001931]">
-            Create Your <span className="text-[#FF8811]">MotoCare</span> Account
+            Create Your <span className="text-[#FF8811]">Moto</span>Care Account
           </h1>
           <p className="mt-4 text-base sm:text-lg text-[#627382] leading-relaxed">
             Join MotoCare to enjoy exclusive bike care services, reminders, and
@@ -55,7 +55,6 @@ const Signup = () => {
           </p>
         </div>
 
-        {/* Right Form */}
         <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-[#001931]/10 shadow-xl rounded-2xl p-6 sm:p-8">
           <h2 className="text-2xl font-semibold mb-6 text-center text-[#001931]">
             Sign Up

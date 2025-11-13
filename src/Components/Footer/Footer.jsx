@@ -9,16 +9,15 @@ const Footer = () => {
   return (
     <footer className="bg-[#001931] text-gray-300 py-14 px-6 md:px-20 relative overflow-hidden">
 
-      {/*  Background Glow */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute w-72 h-72 bg-[#FF6600]/10 rounded-full blur-3xl top-10 left-10"></div>
         <div className="absolute w-72 h-72 bg-[#FF6600]/10 rounded-full blur-3xl bottom-10 right-10"></div>
       </div>
 
-      {/*  Grid Layout */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
 
-        {/* Brand Info */}
+    
         <div>
           <div className="flex items-center gap-2 mb-4">
             <a className="text-2xl font-bold text-white">
@@ -30,7 +29,7 @@ const Footer = () => {
             Let’s keep your bike performing at its best!
           </p>
 
-          {/*  Social Media Icons */}
+       
           <div className="flex space-x-5 mt-5 text-xl">
             <a href="#" className="hover:text-[#FF6600] transition-all duration-300 transform hover:scale-110">
               <FontAwesomeIcon icon={faFacebookF} />
@@ -47,7 +46,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Services */}
+   
         <div>
           <h6 className="text-lg font-semibold text-white mb-4 border-l-4 border-[#FF6600] pl-2">
             Services
@@ -60,7 +59,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Company */}
+
         <div>
           <h6 className="text-lg font-semibold text-white mb-4 border-l-4 border-[#FF6600] pl-2">
             Company
@@ -73,7 +72,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Legal */}
+   
         <div>
           <h6 className="text-lg font-semibold text-white mb-4 border-l-4 border-[#FF6600] pl-2">
             Legal
@@ -86,7 +85,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/*  Copyright */}
+    
       <div className="border-t border-gray-700 mt-12 pt-6 text-center text-sm text-gray-400">
         © {new Date().getFullYear()}{" "}
         <span className="font-bold text-white">

@@ -61,17 +61,17 @@ const SignIn = () => {
 
   return (
     <div className="min-h-[90vh] flex flex-col items-center justify-center bg-[#F1F5E8] relative overflow-hidden px-5 sm:px-10">
-      {/* Decorative Background */}
+    
       <div className="absolute inset-0 -z-10">
         <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#A0C4FF]/30 rounded-full blur-3xl top-10 left-5 animate-pulse"></div>
         <div className="absolute w-48 h-48 sm:w-64 sm:h-64 bg-[#BDB2FF]/30 rounded-full blur-3xl bottom-10 right-5 animate-pulse"></div>
       </div>
 
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-10 py-10">
-        {/* Left Side */}
+       
         <div className="text-center lg:text-left w-full lg:w-1/2">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#001931]">
-            Welcome Back to <span className="text-[#FF8811]">MotoCare</span>
+            Welcome Back to <span className="text-[#FF8811]">Moto</span>Care
           </h1>
           <p className="mt-4 text-base sm:text-lg text-[#627382] leading-relaxed">
             Sign in to manage bookings, track updates, and enjoy personalized
@@ -79,7 +79,7 @@ const SignIn = () => {
           </p>
         </div>
 
-        {/* Right Side (Form) */}
+        
         <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-[#001931]/10 shadow-xl rounded-2xl p-6 sm:p-8">
           <h2 className="text-2xl font-semibold mb-6 text-center text-[#001931]">
             {user ? "Your Profile" : "Sign In"}
@@ -87,7 +87,7 @@ const SignIn = () => {
 
           {!user ? (
             <form onSubmit={handleSignin} className="space-y-4">
-              {/* Email */}
+              
               <div>
                 <label className="block text-sm font-medium mb-1 text-[#001931]">
                   Email
@@ -102,7 +102,7 @@ const SignIn = () => {
                 />
               </div>
 
-              {/* Password */}
+        
               <div className="relative">
                 <label className="block text-sm font-medium mb-1 text-[#001931]">
                   Password
@@ -122,7 +122,7 @@ const SignIn = () => {
                 </span>
               </div>
 
-              {/* Forgot Password */}
+            
               <div className="flex justify-end">
                 <button
                   type="button"
@@ -133,7 +133,7 @@ const SignIn = () => {
                 </button>
               </div>
 
-              {/* Submit */}
+             
               <button
                 type="submit"
                 className="w-full bg-[#001931] hover:bg-[#23354A] text-white font-semibold py-2 rounded-md transition"
@@ -141,7 +141,7 @@ const SignIn = () => {
                 Sign In
               </button>
 
-              {/* Google Sign In */}
+        
               <div className="flex items-center justify-center gap-2 my-3">
                 <div className="h-px w-16 bg-gray-400"></div>
                 <span className="text-sm text-gray-600">or</span>
@@ -161,7 +161,7 @@ const SignIn = () => {
                 Continue with Google
               </button>
 
-              {/* Link to Signup */}
+       
               <p className="text-center text-sm text-[#627382] mt-3">
                 Don’t have an account?{" "}
                 <Link

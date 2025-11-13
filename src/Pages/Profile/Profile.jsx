@@ -75,7 +75,7 @@ const Profile = () => {
         transition={{ duration: 0.6, type: "spring" }}
         className="w-full max-w-md bg-white/70 backdrop-blur-xl border border-[#001931]/10 shadow-2xl rounded-2xl p-8 text-center"
       >
-        {/* Profile Header */}
+       
         <motion.h2
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ const Profile = () => {
           Your Profile
         </motion.h2>
 
-        {/* Avatar + Info */}
+       
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -105,7 +105,7 @@ const Profile = () => {
 
         <hr className="my-6 border-[#C7D0D9]" />
 
-        {/* Edit Mode */}
+      
         {editMode ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

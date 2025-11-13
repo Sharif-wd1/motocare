@@ -19,7 +19,7 @@ const ErrorPage = () => {
         The page you’re looking for doesn’t exist or has been moved.
       </p>
       <button
-        onClick={() => navigate("/")} // ✅ Navigate works now
+        onClick={() => navigate("/")}
         className="bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white font-semibold py-2 px-6 rounded-md hover:opacity-90 transition duration-300"
       >
         Go Back Home

@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  //  user state
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //  Firebase auth state listener
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  //  Logout function
+  
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  //  Context value
+  
   const authInfo = {
     user,
     logOut,
