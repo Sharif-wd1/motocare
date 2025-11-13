@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/src/assets/premium-service.jpg",
+    "image": "/img/premium-service.jpg",
     "title": "Premium Bike Service",
     "description": "Full bike checkup, engine tuning, and polishing to keep your bike running smooth.",
     "price": 50,
@@ -11,7 +11,7 @@
   },
   {
     "id": 2,
-    "image": "/src/assets/helmet.jpg",
+    "image": "/img/helmet.jpg",
     "title": "Helmet & Gear Cleaning",
     "description": "Thorough cleaning and maintenance of helmets, jackets, and gloves for safety and comfort.",
     "price": 20,
@@ -21,7 +21,7 @@
   },
   {
     "id": 3,
-    "image": "/src/assets/installation.jpg",
+    "image": "/img/installation.jpg",
     "title": "Accessories Installation",
     "description": "Professional installation of MotoCare accessories and performance upgrades.",
     "price": 35,
@@ -31,7 +31,7 @@
   },
   {
     "id": 4,
-    "image": "/src/assets/chain.jpg",
+    "image": "/img/chain.jpg",
     "title": "Chain & Brake Service",
     "description": "Chain lubrication, brake adjustment, and tire inspection for safe rides.",
     "price": 25,
@@ -41,7 +41,7 @@
   },
   {
     "id": 5,
-    "image": "/src/assets/oil.jpg",
+    "image": "/img/oil.jpg",
     "title": "Engine Oil Change",
     "description": "High-quality engine oil replacement to ensure smooth performance and longer engine life.",
     "price": 30,
@@ -51,7 +51,7 @@
   },
   {
     "id": 6,
-    "image": "/src/assets/body-pollishing.jpg",
+    "image": "/img/body-pollishing.jpg",
     "title": "Full Body Polishing",
     "description": "Complete exterior polishing and waxing to give your bike a shiny, new look.",
     "price": 40,
